@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+message InvalidDeliveriesRequest {}
+
+message InvalidDeliveriesResponse {
+  repeated Delivery deliveries = 1;
+}
+
+message Delivery {
+    string supplier_id = 1;
+    string driver_id = 2;
+}
+
+service InvalidDeliveriesService {
+  rpc FindInvalidDeliveries (InvalidDeliveriesRequest) returns (InvalidDeliveriesResponse) {}
+}

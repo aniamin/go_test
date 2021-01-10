@@ -1,0 +1,21 @@
+FROM golang:1.15
+
+ENV GO111MODULE=on
+
+WORKDIR /usr/local/go/src/go_test/
+
+COPY ./go.mod .
+COPY ./go.sum .
+
+RUN go mod download
+
+COPY models ./models
+COPY grpc_coffee_server ./gcs
+COPY pb ./pb
+
+RUN go get -v ./...
+RUN go install -v ./...
+
+EXPOSE 3000
+
+CMD [ "gcs" ]

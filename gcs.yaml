@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcs-deployment
+  labels:
+    app: gcs
+spec:
+  selector:
+    matchLabels:
+      app: gcs
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: gcs
+    spec:
+      containers:
+      - name: gcs
+        image: local/gcs
+        imagePullPolicy: Never
+        ports:
+        - name: gcs-service
+          containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcs-service
+spec:
+  selector:
+    app: gcs
+  ports:
+  - port: 3000
+    targetPort: gcs-service
