@@ -19,9 +19,11 @@ You will need to deploy your project using Docker/Kubernetes
 - Use gRPC for the server and provide a postman endpoint. Please provide the proto files.
 - Given that each delivery contains a random bean from the supplier's stock, what is the probability that the delivery is valid. Write an endpoint that will return this result.
 
-## Task completion status
 
-- ### I have written a SQL query that produces the invalid deliveries, here it is
+# Task completion status
+
+
+## 1. I have written a SQL query that produces the invalid deliveries, here it is
 
 ```sql
 WITH all_compination AS (
@@ -47,16 +49,18 @@ WITH all_compination AS (
 	  AND valid_delivery.driver_id IS NULL
 ```
 
-- ### I have written a Golang gRPC server with REST proxies that you can build and deploy running the below commands
 
-## Dependencies
+
+## 2. I have written a Golang gRPC server with REST proxies that you can build and deploy running the below commands
+
+### Dependencies
 
 - [protoc compiler](https://developers.google.com/protocol-buffers/docs/gotutorial)
 - [minikube](https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-minikube/)
 - docker
 - kubectl
 
-## Building
+### Building
 
 Strating minikube
 
@@ -91,3 +95,27 @@ Example
 ```bash
 curl --request GET 'http://127.0.0.1:51650/deliveries/invalid_combination'
 ```
+
+
+
+## 3. I have written the manifests for deploying the server onto a Kubernetes cluster that can be found below
+
+- https://github.com/aniamin/go_test/blob/main/api.yaml
+- https://github.com/aniamin/go_test/blob/main/gcs.yaml
+- https://github.com/aniamin/go_test/blob/main/database.yaml
+
+
+
+## 4. I have used gRPC for the server. Please find the postman and protofiles given below
+
+- Sample Curl
+```bash
+curl <output_url_from_previous_command>/deliveries/invalid_combination
+```
+
+Example
+```bash
+curl --request GET 'http://127.0.0.1:51650/deliveries/invalid_combination'
+```
+
+- Proto files can be found [here](https://github.com/aniamin/go_test/tree/main/pb)
